@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>متجر عمر للإلكترونيات</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .suggestions-list {
+      list-style: none;
+      margin: 5px 0 0;
+      padding: 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      max-height: 150px;
+      overflow-y: auto;
+      background-color: #fff;
+      position: absolute;
+      width: 90%;
+      z-index: 1000;
+    }
+
+    .suggestions-list li {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .suggestions-list li:hover {
+      background-color: #f2f2f2;
+      color: #b91c1c;
+    }
+
+    .search-bar {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .search-bar .container {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+  <div class="container header-content">
+    <div class="logo-box">
+      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
+    </div>
+    <nav class="nav-links">
+      <a href="#">الرئيسية</a>
+      <a href="#">المنتجات</a>
+      <a href="#categories">الأقسام</a>
+      <a href="#">العروض</a>
+      <a href="#">اتصل بنا</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+  <!-- 🔍 شريط البحث -->
+  <section class="search-bar">
+    <div class="container">
+      <input type="text" placeholder="ابحث عن منتج أو قسم..." class="search-input" id="searchInput">
+      <button class="search-button">بحث</button>
+      <ul class="suggestions-list" id="suggestionsList"></ul>
+    </div>
+  </section>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner" style="background-image: url('assets/images/hero.jpg');">
+    <div class="overlay">
+      <div class="container">
+        <h1>قيادة أكثر أمانًا مع منتجاتنا</h1>
+        <p>كاميرات داش، كاربلاي، إكسسوارات مميزة – جودة تضمن راحتك</p>
+        <a href="#categories" class="btn-primary">ابدأ التسوق الآن</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <h2>الأقسام الرئيسية</h2>
+      <div class="category-grid">
+
+        <div class="category-card">
+          <img src="assets/images/banners/dashcam.jpg" alt="داش كام">
+          <h3>داش كام</h3>
+        </div>
+
+        <div class="category-card">
+          <img src="assets/images/banners/dashcam-accessories.jpg" alt="إكسسوارات الداش كام">
+          <h3>إكسسوارات الداش كام</h3>
+        </div>
+
+        <div class="category-card">
+          <img src="assets/images/banners/dashcam-bundles.jpg" alt="بكجات داش كام">
+          <h3>بكجات داش كام</h3>
+        </div>
+
+        <div class="category-card">
+          <img src="assets/images/banners/carplay.jpg" alt="كاربلاي">
+          <h3>كاربلاي</h3>
+        </div>
+
+        <div class="category-card">
+          <img src="assets/images/banners/offers.jpg" alt="وفررها">
+          <h3>وفررها</h3>
+        </div>
+
+        <div class="category-card">
+          <img src="assets/images/banners/car-accessories.jpg" alt="اكسسوارات السيارات">
+          <h3>اكسسوارات السيارات</h3>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <p>© 2025 متجر عمر للإلكترونيات - جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsList = document.getElementById('suggestionsList');
+  const categoryCards = document.querySelectorAll('.category-card');
+
+  const suggestions = [
+    "داش كام",
+    "إكسسوارات الداش كام",
+    "بكجات داش كام",
+    "كاربلاي",
+    "وفررها",
+    "اكسسوارات السيارات"
+  ];
+
+  function filterCategories(query) {
+    let found = false;
+    categoryCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.trim().toLowerCase();
+      if (title.includes(query)) {
+        card.style.display = "block";
+        found = true;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (!found && query !== "") {
+      suggestionsList.innerHTML = `<li style="padding: 10px; color:#888;">لا يوجد نتائج مطابقة.</li>`;
+      suggestionsList.style.display = "block";
+    } else {
+      suggestionsList.style.display = "none";
+    }
+  }
+
+  searchInput.addEventListener('input', function () {
+    const inputVal = this.value.trim().toLowerCase();
+    suggestionsList.innerHTML = '';
+
+    // فلترة البطاقات فورًا
+    filterCategories(inputVal);
+
+    // عرض الاقتراحات المناسبة
+    if (inputVal === "") {
+      categoryCards.forEach(card => card.style.display = "block");
+      suggestionsList.style.display = 'none';
+      return;
+    }
+
+    const filteredSuggestions = suggestions.filter(s => s.toLowerCase().includes(inputVal));
+
+    filteredSuggestions.forEach(s => {
+      const li = document.createElement('li');
+      li.textContent = s;
+      li.addEventListener('click', function () {
+        searchInput.value = s;
+        filterCategories(s.toLowerCase());
+        suggestionsList.innerHTML = '';
+        suggestionsList.style.display = 'none';
+      });
+      suggestionsList.appendChild(li);
+    });
+
+    if (filteredSuggestions.length > 0) {
+      suggestionsList.style.display = 'block';
+    } else {
+      suggestionsList.style.display = 'none';
+    }
+  });
+
+  // الضغط على Enter بدون زر
+  searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const query = searchInput.value.trim().toLowerCase();
+      filterCategories(query);
+      suggestionsList.style.display = 'none';
+    }
+  });
+
+  // إخفاء الاقتراحات عند الضغط بالخارج
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
+      suggestionsList.style.display = 'none';
+    }
+  });
+</script>
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+</script>
+
+
+</body>
+</html>

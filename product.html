@@ -9,58 +9,89 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="main-header">
-    <div class="container">
+<!-- Header -->
+<header class="main-header">
+  <div class="container header-content">
+    <div class="logo-box">
       <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
-      <nav class="nav">
-        <a href="index.html">الرئيسية</a>
-        <a href="#">المنتجات</a>
-        <a href="#">العروض</a>
-        <a href="#">تواصل معنا</a>
-      </nav>
     </div>
-  </header>
+    <nav class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="product.html">المنتجات</a>
+      <a href="category.html">الأقسام</a>
+      <a href="#">العروض</a>
+      <a href="#">اتصل بنا</a>
+    </nav>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
 
-  <!-- Product Section -->
-  <section class="product-page">
-    <div class="container product-container">
+<!-- Product Section -->
+<section class="product-page">
+  <div class="container product-container">
+    
+    <div class="product-image">
+      <img src="assets/images/products/dashcam1.jpg" alt="كاميرا داش كام">
+    </div>
+
+    <div class="product-details">
+      <h1 class="product-title">كاميرا داش كام 4K مع رؤية ليلية</h1>
       
-      <div class="product-image">
-        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا داش كام">
+      <div class="product-pricing">
+        <span class="old-price">399 ر.س</span>
+        <span class="new-price">299 ر.س</span>
       </div>
 
-      <div class="product-details">
-        <h1 class="product-title">كاميرا داش كام 4K مع رؤية ليلية</h1>
-        <div class="product-pricing">
-          <span class="old-price">399 ر.س</span>
-          <span class="new-price">299 ر.س</span>
-        </div>
-
-        <div class="countdown-timer">
-          ⏰ العرض ينتهي خلال: <span id="timer">00:59:36</span>
-        </div>
-
-        <button class="btn-primary">أضف للسلة</button>
-
-        <p class="product-description">
-          كاميرا داش كام بدقة 4K، مع رؤية ليلية وتسجيل تلقائي، مناسبة لجميع أنواع السيارات.
-          مزودة بحساس حركة، وتدعم الذاكرة حتى 128GB.
-        </p>
+      <div class="countdown-timer">
+        ⏰ العرض ينتهي خلال: <span id="timer">--:--:--</span>
       </div>
 
-    </div>
-  </section>
+      <button class="btn-primary">أضف للسلة</button>
 
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="container">
-      <p>© 2025 متجر عمر للإلكترونيات</p>
+      <p class="product-description">
+        كاميرا داش كام بدقة 4K، مع رؤية ليلية وتسجيل تلقائي، مناسبة لجميع أنواع السيارات. مزودة بحساس حركة، وتدعم الذاكرة حتى 128GB.
+      </p>
     </div>
-  </footer>
 
-  <!-- JavaScript للعداد -->
-  <script src="assets/js/script.js"></script>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="main-footer">
+  <div class="container">
+    <p>© 2025 متجر عمر للإلكترونيات - جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // toggle menu
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // simple countdown timer
+  const endTime = new Date(Date.now() + 59 * 60 * 1000); // 59 دقيقة
+  const timerEl = document.getElementById('timer');
+
+  function updateTimer() {
+    const now = new Date();
+    const diff = endTime - now;
+    if (diff <= 0) {
+      timerEl.textContent = "00:00:00";
+      return;
+    }
+    const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+    const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+    const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+    timerEl.textContent = `${hours}:${minutes}:${seconds}`;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
 
 </body>
 </html>

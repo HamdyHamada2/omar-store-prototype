@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قسم داش كام - متجر عمر</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>العروض - متجر عمر</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +19,7 @@
       <a href="index.html">الرئيسية</a>
       <a href="product.html">المنتجات</a>
       <a href="category.html">الأقسام</a>
-      <a href="#">العروض</a>
+      <a href="offers.html" class="active">العروض</a>
       <a href="#">اتصل بنا</a>
     </nav>
     <div class="menu-toggle" id="menuToggle">
@@ -28,47 +28,50 @@
   </div>
 </header>
 
-<!-- Category Hero Banner -->
-<section class="category-hero" style="background-image: url('assets/images/banners/driving-with-dashcam.jpg');">
+<!-- عروض بانر -->
+<section class="category-hero" style="background-image: url('assets/images/banners/offers.jpg');">
   <div class="overlay">
     <div class="container">
-      <h1>📸 قسم داش كام</h1>
-      <p>استكشف أفضل الكاميرات لسيارتك بأفضل الأسعار</p>
+      <h1>🔥 عروض لا تفوتك!</h1>
+      <p>خصومات حصرية على مختاراتنا</p>
     </div>
   </div>
 </section>
 
-<!-- Product Grid -->
+<!-- عروض المنتجات -->
 <section class="category-products">
   <div class="container">
     <div class="product-grid">
       
-      <!-- منتج 1 -->
+      <!-- منتج 1 مع تايمر -->
       <div class="product-card">
-        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا داش 1">
-        <h3>كاميرا داش كام 1080P</h3>
+        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا عرض">
+        <h3>كاميرا داش كام 4K</h3>
         <p class="price">
-          <span class="old-price">250 ر.س</span>
-          <span class="new-price">199 ر.س</span>
+          <span class="old-price">399 ر.س</span>
+          <span class="new-price">299 ر.س</span>
         </p>
+        <div class="countdown-timer">
+          ⏰ العرض ينتهي خلال: <span id="timer">00:59:59</span>
+        </div>
         <button class="btn-primary">أضف للسلة</button>
       </div>
 
       <!-- منتج 2 -->
       <div class="product-card">
-        <img src="assets/images/products/dashcam2.jpg" alt="كاميرا داش 2">
-        <h3>كاميرا داش كام 4K مع GPS</h3>
+        <img src="assets/images/products/dashcam2.jpg" alt="كاميرا 2">
+        <h3>داش كام + كابل هدية</h3>
         <p class="price">
-          <span class="old-price">399 ر.س</span>
-          <span class="new-price">299 ر.س</span>
+          <span class="old-price">299 ر.س</span>
+          <span class="new-price">219 ر.س</span>
         </p>
         <button class="btn-primary">أضف للسلة</button>
       </div>
 
       <!-- منتج 3 -->
       <div class="product-card">
-        <img src="assets/images/products/dashcam3.jpg" alt="كاميرا داش 3">
-        <h3>كاميرا داش صغيرة الحجم</h3>
+        <img src="assets/images/products/dashcam3.jpg" alt="كاميرا 3">
+        <h3>داش كام صغيرة الحجم</h3>
         <p class="price">
           <span class="old-price">199 ر.س</span>
           <span class="new-price">149 ر.س</span>
@@ -87,12 +90,25 @@
   </div>
 </footer>
 
-<!-- JavaScript -->
+<!-- JavaScript للتايمر -->
 <script>
-  // Toggle nav menu
+  // القائمة الجانبية
   document.getElementById('menuToggle').addEventListener('click', function () {
     document.querySelector('.nav-links').classList.toggle('active');
   });
+
+  // تايمر العرض
+  const timerElement = document.getElementById('timer');
+  let countdown = 60 * 60; // 60 دقيقة
+
+  function updateTimer() {
+    const minutes = String(Math.floor(countdown / 60)).padStart(2, '0');
+    const seconds = String(countdown % 60).padStart(2, '0');
+    timerElement.textContent = `00:${minutes}:${seconds}`;
+    if (countdown > 0) countdown--;
+  }
+
+  setInterval(updateTimer, 1000);
 </script>
 
 </body>

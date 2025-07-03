@@ -45,23 +45,22 @@
 
   <!-- Header -->
   <header class="main-header">
-  <div class="container header-content">
-    <div class="logo-box">
-      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
+    <div class="container header-content">
+      <div class="logo-box">
+        <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="product.html">المنتجات</a>
+        <a href="#categories">الأقسام</a>
+        <a href="category.html">العروض</a>
+        <a href="#">اتصل بنا</a>
+      </nav>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-    <nav class="nav-links">
-      <a href="#">الرئيسية</a>
-      <a href="#">المنتجات</a>
-      <a href="#categories">الأقسام</a>
-      <a href="#">العروض</a>
-      <a href="#">اتصل بنا</a>
-    </nav>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</header>
-
+  </header>
 
   <!-- 🔍 شريط البحث -->
   <section class="search-bar">
@@ -132,97 +131,86 @@
 
   <!-- Scripts -->
   <script>
-  const searchInput = document.getElementById('searchInput');
-  const suggestionsList = document.getElementById('suggestionsList');
-  const categoryCards = document.querySelectorAll('.category-card');
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsList = document.getElementById('suggestionsList');
+    const categoryCards = document.querySelectorAll('.category-card');
 
-  const suggestions = [
-    "داش كام",
-    "إكسسوارات الداش كام",
-    "بكجات داش كام",
-    "كاربلاي",
-    "وفررها",
-    "اكسسوارات السيارات"
-  ];
+    const suggestions = [
+      "داش كام",
+      "إكسسوارات الداش كام",
+      "بكجات داش كام",
+      "كاربلاي",
+      "وفررها",
+      "اكسسوارات السيارات"
+    ];
 
-  function filterCategories(query) {
-    let found = false;
-    categoryCards.forEach(card => {
-      const title = card.querySelector('h3').textContent.trim().toLowerCase();
-      if (title.includes(query)) {
-        card.style.display = "block";
-        found = true;
+    function filterCategories(query) {
+      let found = false;
+      categoryCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.trim().toLowerCase();
+        if (title.includes(query)) {
+          card.style.display = "block";
+          found = true;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      if (!found && query !== "") {
+        suggestionsList.innerHTML = `<li style="padding: 10px; color:#888;">لا يوجد نتائج مطابقة.</li>`;
+        suggestionsList.style.display = "block";
       } else {
-        card.style.display = "none";
+        suggestionsList.style.display = "none";
+      }
+    }
+
+    searchInput.addEventListener('input', function () {
+      const inputVal = this.value.trim().toLowerCase();
+      suggestionsList.innerHTML = '';
+
+      filterCategories(inputVal);
+
+      if (inputVal === "") {
+        categoryCards.forEach(card => card.style.display = "block");
+        suggestionsList.style.display = 'none';
+        return;
+      }
+
+      const filteredSuggestions = suggestions.filter(s => s.toLowerCase().includes(inputVal));
+      filteredSuggestions.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        li.addEventListener('click', function () {
+          searchInput.value = s;
+          filterCategories(s.toLowerCase());
+          suggestionsList.innerHTML = '';
+          suggestionsList.style.display = 'none';
+        });
+        suggestionsList.appendChild(li);
+      });
+
+      suggestionsList.style.display = filteredSuggestions.length > 0 ? 'block' : 'none';
+    });
+
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.trim().toLowerCase();
+        filterCategories(query);
+        suggestionsList.style.display = 'none';
       }
     });
 
-    if (!found && query !== "") {
-      suggestionsList.innerHTML = `<li style="padding: 10px; color:#888;">لا يوجد نتائج مطابقة.</li>`;
-      suggestionsList.style.display = "block";
-    } else {
-      suggestionsList.style.display = "none";
-    }
-  }
-
-  searchInput.addEventListener('input', function () {
-    const inputVal = this.value.trim().toLowerCase();
-    suggestionsList.innerHTML = '';
-
-    // فلترة البطاقات فورًا
-    filterCategories(inputVal);
-
-    // عرض الاقتراحات المناسبة
-    if (inputVal === "") {
-      categoryCards.forEach(card => card.style.display = "block");
-      suggestionsList.style.display = 'none';
-      return;
-    }
-
-    const filteredSuggestions = suggestions.filter(s => s.toLowerCase().includes(inputVal));
-
-    filteredSuggestions.forEach(s => {
-      const li = document.createElement('li');
-      li.textContent = s;
-      li.addEventListener('click', function () {
-        searchInput.value = s;
-        filterCategories(s.toLowerCase());
-        suggestionsList.innerHTML = '';
+    document.addEventListener('click', function (e) {
+      if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
         suggestionsList.style.display = 'none';
-      });
-      suggestionsList.appendChild(li);
+      }
     });
 
-    if (filteredSuggestions.length > 0) {
-      suggestionsList.style.display = 'block';
-    } else {
-      suggestionsList.style.display = 'none';
-    }
-  });
-
-  // الضغط على Enter بدون زر
-  searchInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const query = searchInput.value.trim().toLowerCase();
-      filterCategories(query);
-      suggestionsList.style.display = 'none';
-    }
-  });
-
-  // إخفاء الاقتراحات عند الضغط بالخارج
-  document.addEventListener('click', function (e) {
-    if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
-      suggestionsList.style.display = 'none';
-    }
-  });
-</script>
-<script>
-  document.getElementById('menuToggle').addEventListener('click', function () {
-    document.querySelector('.nav-links').classList.toggle('active');
-  });
-</script>
-
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+  </script>
 
 </body>
 </html>

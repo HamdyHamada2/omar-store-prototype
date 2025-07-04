@@ -3,9 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>العروض - متجر عمر</title>
+  <title>عروض متجر عمر</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .offer-timer {
+      background-color: #fceaea;
+      color: #b91c1c;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .coupon-box {
+      background-color: #fff6db;
+      border: 2px dashed #ffc107;
+      text-align: center;
+      padding: 20px;
+      margin: 30px auto;
+      width: 80%;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #8a6d1d;
+      position: relative;
+    }
+
+    .coupon-code {
+      background-color: #fff;
+      border: 1px solid #ffc107;
+      padding: 10px 20px;
+      display: inline-block;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #b91c1c;
+    }
+
+    .coupon-code:hover {
+      background-color: #fff3cd;
+    }
+
+    @media (max-width: 600px) {
+      .coupon-box {
+        width: 95%;
+        font-size: 16px;
+      }
+      .coupon-code {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,11 +65,11 @@
 <header class="main-header">
   <div class="container header-content">
     <div class="logo-box">
-      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
+      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo" />
     </div>
-    <nav class="nav">
+    <nav class="nav" id="navMenu">
       <a href="index.html">الرئيسية</a>
-      <a href="product.html">المنتجات</a>
+      <a href="products.html">المنتجات</a>
       <a href="category.html">الأقسام</a>
       <a href="offers.html" class="active">العروض</a>
       <a href="#">اتصل بنا</a>
@@ -28,55 +80,64 @@
   </div>
 </header>
 
-<!-- عروض بانر -->
-<section class="category-hero" style="background-image: url('assets/images/banners/offers.jpg');">
+<!-- Banner -->
+<section class="category-hero" style="background-image: url('assets/images/offers-banner.jpg');">
   <div class="overlay">
-    <div class="container">
-      <h1>🔥 عروض لا تفوتك!</h1>
-      <p>خصومات حصرية على مختاراتنا</p>
-    </div>
+    <h1>أفضل العروض والتخفيضات</h1>
+    <p>اغتنم الفرصة قبل انتهاء العرض!</p>
   </div>
 </section>
 
-<!-- عروض المنتجات -->
+<!-- Offer Timer -->
+<div class="container">
+  <div class="offer-timer">
+    ⏰ ينتهي العرض خلال: <span id="offer-timer">00:00:00</span>
+  </div>
+</div>
+
+<!-- كوبون الخصم -->
+<div class="coupon-box">
+  🎁 استخدم هذا الكوبون لتحصل على خصم إضافي 10%:
+  <div class="coupon-code" onclick="copyCoupon()">OMAR10</div>
+</div>
+
+<!-- Offers Section -->
 <section class="category-products">
   <div class="container">
+    <h2 style="text-align: center; margin-bottom: 40px;">المنتجات المخفضة</h2>
     <div class="product-grid">
-      
-      <!-- منتج 1 مع تايمر -->
+
+      <!-- Offer 1 -->
       <div class="product-card">
-        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا عرض">
+        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا داش كام" />
         <h3>كاميرا داش كام 4K</h3>
-        <p class="price">
+        <div class="price">
           <span class="old-price">399 ر.س</span>
           <span class="new-price">299 ر.س</span>
-        </p>
-        <div class="countdown-timer">
-          ⏰ العرض ينتهي خلال: <span id="timer">00:59:59</span>
         </div>
-        <button class="btn-primary">أضف للسلة</button>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
       </div>
 
-      <!-- منتج 2 -->
+      <!-- Offer 2 -->
       <div class="product-card">
-        <img src="assets/images/products/dashcam2.jpg" alt="كاميرا 2">
-        <h3>داش كام + كابل هدية</h3>
-        <p class="price">
-          <span class="old-price">299 ر.س</span>
-          <span class="new-price">219 ر.س</span>
-        </p>
-        <button class="btn-primary">أضف للسلة</button>
-      </div>
-
-      <!-- منتج 3 -->
-      <div class="product-card">
-        <img src="assets/images/products/dashcam3.jpg" alt="كاميرا 3">
-        <h3>داش كام صغيرة الحجم</h3>
-        <p class="price">
+        <img src="assets/images/products/gps1.jpg" alt="جهاز تتبع GPS" />
+        <h3>جهاز تتبع GPS صغير</h3>
+        <div class="price">
           <span class="old-price">199 ر.س</span>
           <span class="new-price">149 ر.س</span>
-        </p>
-        <button class="btn-primary">أضف للسلة</button>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+      <!-- Offer 3 -->
+      <div class="product-card">
+        <img src="assets/images/products/cable1.jpg" alt="كابل شحن مغناطيسي" />
+        <h3>كابل شحن مغناطيسي</h3>
+        <div class="price">
+          <span class="old-price">49 ر.س</span>
+          <span class="new-price">35 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
       </div>
 
     </div>
@@ -90,25 +151,41 @@
   </div>
 </footer>
 
-<!-- JavaScript للتايمر -->
+<!-- Scripts -->
 <script>
-  // القائمة الجانبية
-  document.getElementById('menuToggle').addEventListener('click', function () {
-    document.querySelector('.nav-links').classList.toggle('active');
+  // القائمة المتنقلة
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
   });
 
-  // تايمر العرض
-  const timerElement = document.getElementById('timer');
-  let countdown = 60 * 60; // 60 دقيقة
+  // مؤقت العروض
+  const endTime = new Date(Date.now() + 2 * 60 * 60 * 1000); // ساعتين من الآن
+  const offerTimerEl = document.getElementById("offer-timer");
 
-  function updateTimer() {
-    const minutes = String(Math.floor(countdown / 60)).padStart(2, '0');
-    const seconds = String(countdown % 60).padStart(2, '0');
-    timerElement.textContent = `00:${minutes}:${seconds}`;
-    if (countdown > 0) countdown--;
+  function updateOfferTimer() {
+    const now = new Date();
+    const diff = endTime - now;
+    if (diff <= 0) {
+      offerTimerEl.textContent = "00:00:00";
+      return;
+    }
+    const h = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, "0");
+    const m = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+    const s = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, "0");
+    offerTimerEl.textContent = `${h}:${m}:${s}`;
   }
 
-  setInterval(updateTimer, 1000);
+  updateOfferTimer();
+  setInterval(updateOfferTimer, 1000);
+
+  // نسخ الكوبون
+  function copyCoupon() {
+    navigator.clipboard.writeText("OMAR10").then(() => {
+      alert("تم نسخ الكوبون بنجاح: OMAR10 🎉");
+    });
+  }
 </script>
 
 </body>

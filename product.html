@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صفحة المنتج</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>كل المنتجات</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<!-- Header -->
+<!-- الهيدر -->
 <header class="main-header">
   <div class="container header-content">
     <div class="logo-box">
-      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo">
+      <img src="assets/images/logo.png" alt="شعار المتجر" class="logo" />
     </div>
-    <nav class="nav">
+    <nav class="nav" id="navMenu">
       <a href="index.html">الرئيسية</a>
-      <a href="product.html">المنتجات</a>
+      <a href="products.html" class="active">المنتجات</a>
       <a href="category.html">الأقسام</a>
       <a href="offers.html">العروض</a>
       <a href="#">اتصل بنا</a>
@@ -28,37 +28,78 @@
   </div>
 </header>
 
-<!-- Product Section -->
-<section class="product-page">
-  <div class="container product-container">
-    
-    <div class="product-image">
-      <img src="assets/images/products/dashcam1.jpg" alt="كاميرا داش كام">
-    </div>
-
-    <div class="product-details">
-      <h1 class="product-title">كاميرا داش كام 4K مع رؤية ليلية</h1>
-      
-      <div class="product-pricing">
-        <span class="old-price">399 ر.س</span>
-        <span class="new-price">299 ر.س</span>
-      </div>
-
-      <div class="countdown-timer">
-        ⏰ العرض ينتهي خلال: <span id="timer">--:--:--</span>
-      </div>
-
-      <button class="btn-primary">أضف للسلة</button>
-
-      <p class="product-description">
-        كاميرا داش كام بدقة 4K، مع رؤية ليلية وتسجيل تلقائي، مناسبة لجميع أنواع السيارات. مزودة بحساس حركة، وتدعم الذاكرة حتى 128GB.
-      </p>
-    </div>
-
+<!-- شريط البحث -->
+<section class="search-bar">
+  <div class="container">
+    <input type="text" class="search-input" placeholder="ابحث عن منتج..." />
+    <button class="search-button">بحث</button>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- المنتجات -->
+<section class="category-products">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 40px;">كل المنتجات</h2>
+    <div class="product-grid">
+
+      <!-- منتج 1 -->
+      <div class="product-card">
+        <img src="assets/images/products/dashcam1.jpg" alt="كاميرا 4K">
+        <h3>كاميرا داش كام 4K</h3>
+        <div class="price">
+          <span class="old-price">399 ر.س</span>
+          <span class="new-price">299 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+      <!-- منتج 2 -->
+      <div class="product-card">
+        <img src="assets/images/products/gps1.jpg" alt="جهاز تتبع GPS">
+        <h3>جهاز تتبع GPS صغير</h3>
+        <div class="price">
+          <span class="old-price">199 ر.س</span>
+          <span class="new-price">149 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+      <!-- منتج 3 -->
+      <div class="product-card">
+        <img src="assets/images/products/charger1.jpg" alt="شاحن سيارة سريع">
+        <h3>شاحن سيارة سريع USB-C</h3>
+        <div class="price">
+          <span class="new-price">79 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+      <!-- منتج 4 -->
+      <div class="product-card">
+        <img src="assets/images/products/holder1.jpg" alt="حامل موبايل">
+        <h3>حامل موبايل للمراية</h3>
+        <div class="price">
+          <span class="new-price">59 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+      <!-- منتج 5 -->
+      <div class="product-card">
+        <img src="assets/images/products/cable1.jpg" alt="كابل شحن">
+        <h3>كابل شحن مغناطيسي</h3>
+        <div class="price">
+          <span class="old-price">49 ر.س</span>
+          <span class="new-price">35 ر.س</span>
+        </div>
+        <a href="product.html" class="btn-primary">عرض التفاصيل</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- الفوتر -->
 <footer class="main-footer">
   <div class="container">
     <p>© 2025 متجر عمر للإلكترونيات - جميع الحقوق محفوظة</p>
@@ -67,30 +108,12 @@
 
 <!-- JavaScript -->
 <script>
-  // toggle menu
-  document.getElementById('menuToggle').addEventListener('click', function () {
-    document.querySelector('.nav-links').classList.toggle('active');
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
   });
-
-  // simple countdown timer
-  const endTime = new Date(Date.now() + 59 * 60 * 1000); // 59 دقيقة
-  const timerEl = document.getElementById('timer');
-
-  function updateTimer() {
-    const now = new Date();
-    const diff = endTime - now;
-    if (diff <= 0) {
-      timerEl.textContent = "00:00:00";
-      return;
-    }
-    const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-    const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-    const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-    timerEl.textContent = `${hours}:${minutes}:${seconds}`;
-  }
-
-  updateTimer();
-  setInterval(updateTimer, 1000);
 </script>
 
 </body>

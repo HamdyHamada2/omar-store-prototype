@@ -6,6 +6,7 @@
   <title>متجر عمر للإلكترونيات</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     .suggestions-list {
       list-style: none;
@@ -194,23 +195,19 @@
       suggestionsList.style.display = filteredSuggestions.length > 0 ? 'block' : 'none';
     });
 
-    searchInput.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const query = searchInput.value.trim().toLowerCase();
-        filterCategories(query);
-        suggestionsList.style.display = 'none';
-      }
-    });
-
     document.addEventListener('click', function (e) {
       if (!searchInput.contains(e.target) && !suggestionsList.contains(e.target)) {
         suggestionsList.style.display = 'none';
       }
     });
 
-    document.getElementById('menuToggle').addEventListener('click', function () {
-      document.querySelector('.nav-links').classList.toggle('active');
+    // ✅ إصلاح القائمة الجانبية
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
   </script>
 
